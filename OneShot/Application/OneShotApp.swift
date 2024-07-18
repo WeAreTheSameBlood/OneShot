@@ -11,10 +11,8 @@ import SwiftUI
 struct OneShotApp: App {
     var body: some Scene {
         WindowGroup {
-            TranlatorView()
-                .onAppear {
-                    setupWindow()
-                }
+            TranslatorView()
+                .onAppear { setupWindow() }
         }
     }
 }

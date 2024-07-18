@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3715C63C2C337AFA00269EED /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715C63B2C337AFA00269EED /* Colors.swift */; };
+		3731279D2C497EDB00BDC4AA /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3731279C2C497EDB00BDC4AA /* TranslationService.swift */; };
 		373888F82C32D30600B44BEA /* OneShotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373888F72C32D30600B44BEA /* OneShotApp.swift */; };
 		373888FA2C32D30600B44BEA /* TranlatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373888F92C32D30600B44BEA /* TranlatorView.swift */; };
 		373888FC2C32D30800B44BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 373888FB2C32D30800B44BEA /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		3715C63B2C337AFA00269EED /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		3731279C2C497EDB00BDC4AA /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
 		373888F42C32D30600B44BEA /* OneShot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneShot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		373888F72C32D30600B44BEA /* OneShotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneShotApp.swift; sourceTree = "<group>"; };
 		373888F92C32D30600B44BEA /* TranlatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranlatorView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,38 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		373127992C497EB900BDC4AA /* BuisnessLogic */ = {
+			isa = PBXGroup;
+			children = (
+				3731279A2C497EC900BDC4AA /* Services */,
+			);
+			path = BuisnessLogic;
+			sourceTree = "<group>";
+		};
+		3731279A2C497EC900BDC4AA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3731279B2C497ED000BDC4AA /* Translation */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3731279B2C497ED000BDC4AA /* Translation */ = {
+			isa = PBXGroup;
+			children = (
+				3731279C2C497EDB00BDC4AA /* TranslationService.swift */,
+			);
+			path = Translation;
+			sourceTree = "<group>";
+		};
+		3731279E2C4987D300BDC4AA /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				373888F92C32D30600B44BEA /* TranlatorView.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		373888EB2C32D30600B44BEA = {
 			isa = PBXGroup;
 			children = (
@@ -79,8 +113,9 @@
 			isa = PBXGroup;
 			children = (
 				3715C63A2C337ADB00269EED /* Application */,
+				373127992C497EB900BDC4AA /* BuisnessLogic */,
+				3731279E2C4987D300BDC4AA /* Presentation */,
 				3715C6382C337ACA00269EED /* Resourses */,
-				373888F92C32D30600B44BEA /* TranlatorView.swift */,
 				373888FB2C32D30800B44BEA /* Assets.xcassets */,
 				373889002C32D30800B44BEA /* OneShot.entitlements */,
 				373888FD2C32D30800B44BEA /* Preview Content */,
@@ -169,6 +204,7 @@
 				373888FA2C32D30600B44BEA /* TranlatorView.swift in Sources */,
 				3715C63C2C337AFA00269EED /* Colors.swift in Sources */,
 				373888F82C32D30600B44BEA /* OneShotApp.swift in Sources */,
+				3731279D2C497EDB00BDC4AA /* TranslationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +335,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OneShot/OneShot.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -326,6 +363,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OneShot/OneShot.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

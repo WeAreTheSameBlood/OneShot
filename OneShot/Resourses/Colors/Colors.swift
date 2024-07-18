@@ -9,6 +9,6 @@ import SwiftUI
 
 enum Colors {
     enum App {
-        static let background = Color.black.opacity(0.666)
+        static let background = Color.black // .opacity(0.666)
     }
 }
