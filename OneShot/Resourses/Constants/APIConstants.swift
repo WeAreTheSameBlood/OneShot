@@ -6,8 +6,8 @@
 //
 
 enum APIConstants {
-    static let API_KEY = "api_key"
-    static let API_URL = "https://api-free.deepl.com/v2/translate/"
+    static let API_KEY = "84e0c0b4-f4dd-42d3-930c-01c7fe2ca71d:fx"
+    static let API_URL = "https://api-free.deepl.com/v2/translate"
     
     enum RequestParam {
         static let httpMethod = "POST"

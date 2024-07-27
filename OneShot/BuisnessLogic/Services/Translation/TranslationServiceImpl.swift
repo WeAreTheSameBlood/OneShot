@@ -8,13 +8,32 @@
 import SwiftUI
 import Combine
 
-final class TranslationService: ObservableObject {
-    // MARK: - Properties
-    @Published var translatedText: String = ""
+enum TranslationServiceEvents {
+    case translated(_: String)
+}
+
+protocol TranslationService: ObservableObject {
+    // MARK: - Publisher
+    var eventPublisher: AnyPublisher<TranslationServiceEvents, Never> { get }
+    
+    // MARK: - Funcs
+    func doTranslation(
+        _ text: String,
+        from sourceLanguage: SourceLanguage,
+        to targetLanguage: SourceLanguage
+    )
+}
+
+final class TranslationServiceImpl: TranslationService {
+    // MARK: - Publisher
+    private(set) lazy var eventPublisher = eventSubject.eraseToAnyPublisher()
+    private let eventSubject = PassthroughSubject<TranslationServiceEvents, Never>()
+    
+    // MARK: - Cancellables
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Funcs
-    func translateText(
+    func doTranslation(
         _ text: String,
         from sourceLanguage: SourceLanguage,
         to targetLanguage: SourceLanguage
@@ -25,22 +44,10 @@ final class TranslationService: ObservableObject {
             targetLanguage: targetLanguage.rawValue
         )
     }
-    
-    func reverseTranslateText(
-        _ text: String,
-        from targetLanguage: SourceLanguage,
-        to sourceLanguage: SourceLanguage
-    ) {
-        makeRequest(
-            text: text,
-            sourceLanguage: targetLanguage.rawValue,
-            targetLanguage: sourceLanguage.rawValue
-        )
-    }
 }
 
 // MARK: - Private
-private extension TranslationService {
+private extension TranslationServiceImpl {
     func makeRequest(
         text: String,
         sourceLanguage: String,
@@ -74,19 +81,15 @@ private extension TranslationService {
                 switch completion {
                 case .failure(let error):
                     debugPrint("Translation error: \(error)")
+                    self.eventSubject.send(.translated("Translation error"))
                     
                 case .finished: break
                 }
             }, receiveValue: { [weak self] (response) in
-                self?.translatedText = response.translations.first?.text ?? ""
+                self?.eventSubject.send(
+                    .translated(response.translations.first?.text ?? "Result text is empty")
+                )
             })
             .store(in: &cancellables)
     }
-}
-
-struct TranslationResponse: Decodable {
-    struct Translation: Decodable {
-        let text: String
-    }
-    let translations: [Translation]
 }

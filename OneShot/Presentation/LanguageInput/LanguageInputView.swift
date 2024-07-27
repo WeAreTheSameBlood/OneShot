@@ -13,7 +13,8 @@ struct LanguageInputView: View {
     @Binding var text: String
     var placeholder: String
     var onCommit: () -> Void
-    
+    @Binding var isFirstResponder: Bool
+
     // MARK: - Body
     var body: some View {
         HStack {
@@ -34,11 +35,16 @@ struct LanguageInputView: View {
             .padding(.trailing, Constants.padding)
             .frame(maxWidth: 70)
 
-            TextField(placeholder, text: $text, onCommit: onCommit)
-                .padding(Constants.padding)
-                .foregroundColor(.white)
-                .font(.system(size: 16))
-                .textFieldStyle(PlainTextFieldStyle())
+            FocusableTextField(
+                text: $text,
+                placeholder: placeholder,
+                onCommit: onCommit,
+                isFirstResponder: $isFirstResponder
+            )
+            .padding(Constants.padding)
+            .foregroundColor(.white)
+            .font(.system(size: 16))
+            .textFieldStyle(PlainTextFieldStyle())
         }
         .padding(Constants.padding)
         .padding(.horizontal)

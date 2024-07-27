@@ -8,59 +8,40 @@
 import SwiftUI
 
 struct TranslatorView: View {
-    // MARK: - Properties
-    @State private var inputLanguage: SourceLanguage = .uk
-    @State private var outputLanguage: SourceLanguage = .it
-    @State private var inputPlaceholder = ["Your word", "Input text", "Cucumber", "Investigation", "Bizarre", "Mind control"]
-    @State private var inputText: String = ""
-    @ObservedObject private var translationService = TranslationService()
-    private var timer = Timer.publish(every: 2.0, on: .main, in: .common).autoconnect()
-    @State private var lastEditDate = Date()
+    @StateObject private var viewModel = TranslatorViewModel()
+    @State private var isFirstResponder: Bool = true
 
-    // MARK: - Body
     var body: some View {
         VStack(spacing: 0) {
             LanguageInputView(
-                selectedLanguage: $inputLanguage,
-                placeholder: inputPlaceholder.randomElement()!,
-                text: $inputText,
-                onCommit: translateText
+                selectedLanguage: $viewModel.inputLanguage,
+                text: $viewModel.inputText,
+                placeholder: viewModel.inputPlaceholder.randomElement()!,
+                onCommit: viewModel.doTranslation,
+                isFirstResponder: $isFirstResponder
             )
             
-            if !translationService.translatedText.isEmpty {
+            if !viewModel.translatedText.isEmpty {
                 Divider()
                     .frame(height: 0.5)
                     .padding(.horizontal)
                 
                 LanguageInputView(
-                    selectedLanguage: $outputLanguage,
-                    placeholder: translationService.translatedText,
-                    text: $translationService.translatedText,
-                    onCommit: reverseTranslate
+                    selectedLanguage: $viewModel.outputLanguage,
+                    text: $viewModel.translatedText,
+                    placeholder: viewModel.translatedText,
+                    onCommit: { },
+                    isFirstResponder: .constant(false)
                 )
             }
         }
         .background(Colors.App.background)
         .cornerRadius(Constants.cornerRadius)
-        .onChange(of: inputText) { (newValue) in
-            lastEditDate = Date()
-            if newValue.last == " " || newValue.last == "," || newValue.last == "." {
-                translateText()
+        .onAppear {
+            DispatchQueue.main.async {
+                isFirstResponder = true
             }
         }
-        .onReceive(timer) { _ in
-            if Date().timeIntervalSince(lastEditDate) >= 2 {
-                translateText()
-            }
-        }
-    }
-    
-    func translateText() {
-        translationService.translateText(inputText, from: inputLanguage, to: outputLanguage)
-    }
-    
-    func reverseTranslate() {
-        translationService.reverseTranslateText(translationService.translatedText, from: outputLanguage, to: inputLanguage)
     }
 }
 
