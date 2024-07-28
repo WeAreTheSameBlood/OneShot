@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct TranslatorView: View {
+    // MARK: - Properties
     @StateObject private var viewModel = TranslatorViewModel()
-    @State private var isFirstResponder: Bool = true
-
+    @Binding var isFirstResponder: Bool
+    
+    // MARK: - Body
     var body: some View {
         VStack(spacing: 0) {
             LanguageInputView(
@@ -38,15 +40,13 @@ struct TranslatorView: View {
         .background(Colors.App.background)
         .cornerRadius(Constants.cornerRadius)
         .onAppear {
-            DispatchQueue.main.async {
-                isFirstResponder = true
-            }
+            DispatchQueue.main.async { isFirstResponder = true }
         }
     }
 }
 
 #Preview {
-    TranslatorView()
+    TranslatorView(isFirstResponder: .constant(true))
         .frame(width: 400 , height: 90)
 }
 

@@ -16,6 +16,7 @@
 		373888FA2C32D30600B44BEA /* TranlatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373888F92C32D30600B44BEA /* TranlatorView.swift */; };
 		373888FC2C32D30800B44BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 373888FB2C32D30800B44BEA /* Assets.xcassets */; };
 		373888FF2C32D30800B44BEA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 373888FE2C32D30800B44BEA /* Preview Assets.xcassets */; };
+		3750F6482C56956E00019360 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 3750F6472C56956E00019360 /* HotKey */; };
 		37701EBB2C552A32007F6745 /* TranslatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37701EBA2C552A32007F6745 /* TranslatorViewModel.swift */; };
 		37701EBE2C55332B007F6745 /* TranslationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37701EBD2C55332B007F6745 /* TranslationResponse.swift */; };
 		37701EC02C553CAF007F6745 /* FocusableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37701EBF2C553CAF007F6745 /* FocusableTextField.swift */; };
@@ -43,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3750F6482C56956E00019360 /* HotKey in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +54,7 @@
 		3715C6382C337ACA00269EED /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
+				3750F6492C56BE2200019360 /* Assets */,
 				373127A82C4A936300BDC4AA /* Constants */,
 				3715C6392C337AD200269EED /* Colors */,
 			);
@@ -104,7 +107,6 @@
 			children = (
 				3731279F2C4A75DC00BDC4AA /* LanguageInput */,
 				373127A22C4A765800BDC4AA /* TranslatorView */,
-				37701EBF2C553CAF007F6745 /* FocusableTextField.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -180,9 +182,9 @@
 			children = (
 				3715C63A2C337ADB00269EED /* Application */,
 				373127992C497EB900BDC4AA /* BuisnessLogic */,
+				3750F64C2C56BE4B00019360 /* CoreUI */,
 				3731279E2C4987D300BDC4AA /* Presentation */,
 				3715C6382C337ACA00269EED /* Resourses */,
-				373888FB2C32D30800B44BEA /* Assets.xcassets */,
 				373889002C32D30800B44BEA /* OneShot.entitlements */,
 				373888FD2C32D30800B44BEA /* Preview Content */,
 			);
@@ -197,10 +199,50 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		37701EBC2C55331A007F6745 /* Response */ = {
+		3750F6492C56BE2200019360 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				373888FB2C32D30800B44BEA /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		3750F64A2C56BE4000019360 /* FocusableTextField */ = {
+			isa = PBXGroup;
+			children = (
+				37701EBF2C553CAF007F6745 /* FocusableTextField.swift */,
+			);
+			path = FocusableTextField;
+			sourceTree = "<group>";
+		};
+		3750F64B2C56BE4500019360 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3750F64A2C56BE4000019360 /* FocusableTextField */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3750F64C2C56BE4B00019360 /* CoreUI */ = {
+			isa = PBXGroup;
+			children = (
+				3750F64B2C56BE4500019360 /* Components */,
+			);
+			path = CoreUI;
+			sourceTree = "<group>";
+		};
+		3750F64D2C56BEA800019360 /* Translation */ = {
 			isa = PBXGroup;
 			children = (
 				37701EBD2C55332B007F6745 /* TranslationResponse.swift */,
+			);
+			path = Translation;
+			sourceTree = "<group>";
+		};
+		37701EBC2C55331A007F6745 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				3750F64D2C56BEA800019360 /* Translation */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -221,6 +263,9 @@
 			dependencies = (
 			);
 			name = OneShot;
+			packageProductDependencies = (
+				3750F6472C56956E00019360 /* HotKey */,
+			);
 			productName = OneShot;
 			productReference = 373888F42C32D30600B44BEA /* OneShot.app */;
 			productType = "com.apple.product-type.application";
@@ -249,6 +294,9 @@
 				Base,
 			);
 			mainGroup = 373888EB2C32D30600B44BEA;
+			packageReferences = (
+				3750F6462C56956E00019360 /* XCRemoteSwiftPackageReference "HotKey" */,
+			);
 			productRefGroup = 373888F52C32D30600B44BEA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -487,6 +535,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3750F6462C56956E00019360 /* XCRemoteSwiftPackageReference "HotKey" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soffes/HotKey";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3750F6472C56956E00019360 /* HotKey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3750F6462C56956E00019360 /* XCRemoteSwiftPackageReference "HotKey" */;
+			productName = HotKey;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 373888EC2C32D30600B44BEA /* Project object */;
 }

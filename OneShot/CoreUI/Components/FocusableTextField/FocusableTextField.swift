@@ -9,15 +9,35 @@ import SwiftUI
 import AppKit
 
 struct FocusableTextField: NSViewRepresentable {
+    // MARK: - Properties
     @Binding var text: String
     var placeholder: String
     var onCommit: () -> Void
     @Binding var isFirstResponder: Bool
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+    
+    // MARK: - Coordinator
+    class Coordinator: NSObject, NSTextFieldDelegate {
+        var parent: FocusableTextField
+        
+        init(_ parent: FocusableTextField) {
+            self.parent = parent
+        }
+        
+        func controlTextDidChange(_ obj: Notification) {
+            guard let textField = obj.object as? NSTextField else { return }
+            parent.text = textField.stringValue
+        }
+        
+        func controlTextDidEndEditing(_ obj: Notification) {
+            parent.onCommit()
+        }
     }
+}
 
+// MARK: - Funcs
+extension FocusableTextField {
+    func makeCoordinator() -> Coordinator { Coordinator(self) }
+    
     func makeNSView(context: Context) -> NSTextField {
         let textField = NSTextField()
         textField.placeholderString = placeholder
@@ -25,7 +45,7 @@ struct FocusableTextField: NSViewRepresentable {
         textField.focusRingType = .none
         return textField
     }
-
+    
     func updateNSView(_ nsView: NSTextField, context: Context) {
         nsView.stringValue = text
         if isFirstResponder {
@@ -33,23 +53,6 @@ struct FocusableTextField: NSViewRepresentable {
                 nsView.window?.makeFirstResponder(nsView)
                 isFirstResponder = false
             }
-        }
-    }
-
-    class Coordinator: NSObject, NSTextFieldDelegate {
-        var parent: FocusableTextField
-
-        init(_ parent: FocusableTextField) {
-            self.parent = parent
-        }
-
-        func controlTextDidChange(_ obj: Notification) {
-            guard let textField = obj.object as? NSTextField else { return }
-            parent.text = textField.stringValue
-        }
-
-        func controlTextDidEndEditing(_ obj: Notification) {
-            parent.onCommit()
         }
     }
 }
